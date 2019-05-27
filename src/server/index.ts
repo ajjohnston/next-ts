@@ -22,7 +22,7 @@ app
         throw err
       }
 
-      console.log(`> Ready on http://localhost:${PORT}`)
+      console.info(`> Ready on http://localhost:${PORT}`)
     })
   })
   .catch(ex => {
