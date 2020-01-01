@@ -1,6 +1,7 @@
 import React from 'react';
+import { NextComponentType } from 'next';
 
-const Index: React.FunctionComponent = () => (
+const Index: NextComponentType = () => (
   <div>
     <p>Hello Next.js</p>
   </div>
