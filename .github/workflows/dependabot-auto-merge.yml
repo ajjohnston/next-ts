@@ -4,10 +4,10 @@ on:
 jobs:
   worker:
     runs-on: ubuntu-latest
-if: github.actor == 'dependabot[bot]'
     steps:
       - name: automerge
         uses: actions/github-script@0.2.0
+        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
         with:
           script: |
             github.pullRequests.createReview({
@@ -21,4 +21,4 @@ if: github.actor == 'dependabot[bot]'
               repo: context.payload.repository.name,
               pull_number: context.payload.pull_request.number
             })
-          github-token: ${{github.token}}
+          github-token: ${{ secrets.AUTO_MERGE }}
