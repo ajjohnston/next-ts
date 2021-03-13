@@ -1,24 +1,14 @@
-name: "Dependabot Automerge - Action"
+name: auto-merge
+
 on:
   pull_request:
+
 jobs:
-  worker:
+  auto-merge:
     runs-on: ubuntu-latest
     steps:
-      - name: automerge
-        uses: actions/github-script@0.2.0
-        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
+      - uses: actions/checkout@v2
+      - uses: ahmadnassri/action-dependabot-auto-merge@v2
         with:
-          script: |
-            github.pullRequests.createReview({
-              owner: context.payload.repository.owner.login,
-              repo: context.payload.repository.name,
-              pull_number: context.payload.pull_request.number,
-              event: 'APPROVE'
-            })
-            github.pullRequests.merge({
-              owner: context.payload.repository.owner.login,
-              repo: context.payload.repository.name,
-              pull_number: context.payload.pull_request.number
-            })
+          target: minor
           github-token: ${{ secrets.AUTO_MERGE }}
